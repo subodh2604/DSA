@@ -1,0 +1,43 @@
+class Solution {
+    public int findCanJump(int[] nums,int index,int[] dp)
+    {
+        if(index==nums.length-1)
+        {
+            return 1;
+        }
+
+        if(index>=nums.length)
+        {
+            return 0;
+        }
+        if(dp[index]!=-1)
+        {
+            return dp[index];
+        }
+        int ans=0;
+        for(int i=1;i<=nums[index];i++)
+        {
+            if(findCanJump(nums,i+index,dp)==1)
+            {
+                ans=1;
+                break;
+            }
+        }
+        dp[index]=ans;
+        return dp[index];
+    }
+    public boolean canJump(int[] nums) {
+        int[] dp=new int[nums.length+1];
+
+        Arrays.fill(dp,-1);
+
+        int ans= findCanJump(nums,0,dp);
+        
+        if(ans==1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
