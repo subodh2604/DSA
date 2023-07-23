@@ -1,0 +1,85 @@
+package SearchingAndSorting;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class EKOSpoj {
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc=new Scanner(System.in);
+		
+		String NandM=sc.nextLine();
+		String elements=sc.nextLine();
+		int N=0;
+		
+		int M=0;
+		
+		String[] NandMArr=NandM.split(" ");
+		
+		N=Integer.parseInt(NandMArr[0]);
+		M=Integer.parseInt(NandMArr[1]);
+		
+		String[] eleArr=elements.split(" ");
+		
+		int[] trees=new int[eleArr.length];
+		
+		for(int i=0;i<eleArr.length;i++)
+		{
+			trees[i]=Integer.parseInt(eleArr[i]);
+		}
+		
+		int maximum=Integer.MIN_VALUE;
+        Arrays.sort(trees);
+        
+        for(int i=0;i<trees.length;i++)
+        {
+            if(trees[i]>maximum)
+            {
+                maximum=trees[i];
+            }
+        }
+
+        System.out.println(BinarySearch(trees,trees.length,M,0,maximum)); 
+	}
+
+	private static int BinarySearch(int[] trees,int n,int m,int start,int end) {
+		int mid=start+(end-start)/2;
+
+        int ans=-1;
+
+        while(start<=end)
+        {
+            if(isPossible(trees,m,mid)!=-1)
+            {
+                ans=mid;
+                start=mid+1;
+            }
+            else{
+                end=mid-1;
+            }
+
+            mid=start+(end-start)/2;
+        }
+        return ans;
+	}
+
+	private static int isPossible(int[] trees, int m, int cut) {
+		
+		int sum=0;
+
+		for(int i=0;i<trees.length;i++)
+		{
+			if(trees[i]>cut)
+			{
+				sum=sum+trees[i]-cut;
+			}
+		}
+		
+		if(sum>=m)
+		{
+			return sum;
+		}
+		
+		return -1;
+	}
+}
