@@ -1,0 +1,77 @@
+package SearchingAndSorting;
+
+public class PrathaSpoj {
+
+	public static void main(String[] args) {
+		int parathas=8;
+		
+		int[] cooks=new int[] {1};
+		int maximum=Integer.MIN_VALUE;
+		
+		for(int i=0;i<cooks.length;i++)
+		{
+			maximum=Math.max(maximum, cooks[i]);
+		}
+		int sum=0;
+		for(int i=1;i<=parathas;i++)
+		{
+			sum=sum+maximum*i;
+		}
+		
+		System.out.println("minimum time required: "+BinarySearch(cooks,parathas,0,sum));
+
+	}
+
+	private static int BinarySearch(int[] cooks, int parathas, int start, int end) {
+		int ans=-1;
+		
+		int mid=start+(end-start)/2;
+		
+		while(start<=end)
+		{
+			if(isPossible(cooks,parathas,mid))
+			{
+				ans=mid;
+				end=mid-1;
+			}
+			else {
+				start=mid+1;
+			}
+			
+			mid=start+(end-start)/2;
+		}
+		
+		return ans;
+	}
+
+	private static boolean isPossible(int[] cooks, int parathas, int mid) {
+		int currentParathas=0;
+		for(int i=0;i<cooks.length;i++)
+		{
+			int sum=0;
+			for(int j=1;j<=parathas;j++)
+			{
+				sum=sum+cooks[i]*j;
+				if(sum>mid)
+				{
+					break;
+				}
+				else {
+					currentParathas++;
+					if(currentParathas>=parathas)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		
+		if(currentParathas>=parathas)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+}
