@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character,Character> hm=new HashMap<>();
+
+        HashMap<Character,Boolean> charMapped=new HashMap<>();
+
+        for(int i=0;i<t.length();i++)
+        {
+            if(hm.containsKey(t.charAt(i)))
+            {
+                if(s.charAt(i)!=hm.get(t.charAt(i)))
+                {
+                    return false;
+                }
+            }
+            else{
+                if(charMapped.containsKey(s.charAt(i)))
+                {
+                    return false;
+                }
+                hm.put(t.charAt(i),s.charAt(i));
+                charMapped.put(s.charAt(i),true);
+            }
+        }
+
+        return true;
+    }
+}
