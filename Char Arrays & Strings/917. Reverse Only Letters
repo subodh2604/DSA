@@ -1,0 +1,44 @@
+class Solution {
+    public void swap(char[] chars,int i,int j)
+    {
+        char temp=chars[i];
+        chars[i]=chars[j];
+        chars[j]=temp;
+    }
+    public String reverseOnlyLetters(String s) {
+        char[] chars=s.toCharArray();
+        int start=0;
+        int end=s.length()-1;
+
+        while(start<end)
+        {
+            if(((chars[start]>='a' && chars[start]<='z') || (chars[start]>='A' && chars[start]<='Z')) && 
+            ((chars[end]>='a' && chars[end]<='z') || (chars[end]>='A' && chars[end]<='Z')))
+            {
+                swap(chars,start,end);
+                start++;
+                end--;
+            }
+            else if((chars[start]>='a' && chars[start]<='z') || (chars[start]>='A' && chars[start]<='Z'))
+            {
+                end--;
+            }
+            else if((chars[end]>='a' && chars[end]<='z') || (chars[end]>='A' && chars[end]<='Z'))
+            {
+                start++;
+            }
+            else{
+                start++;
+                end--;
+            }
+        }
+
+        String ans="";
+        for(int i=0;i<chars.length;i++)
+        {
+            ans+=chars[i];
+        }
+
+        return ans;
+    }
+}
