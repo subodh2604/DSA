@@ -1,0 +1,38 @@
+class Solution {
+    public void swap(char[] chars,int i,int j)
+    {
+        char temp=chars[i];
+        chars[i]=chars[j];
+        chars[j]=temp;
+    }
+    public String reverseVowels(String s) {
+        String ans="";
+        int start=0;
+        int end=s.length()-1;
+        char[] chars=s.toCharArray();
+        String vowels="aeiouAEIOU";
+        while(start<end)
+        {
+            if(vowels.indexOf(chars[start])!=-1 && vowels.indexOf(chars[end])!=-1)
+            {
+                swap(chars,start,end);
+                start++;
+                end--;
+            } 
+            else if(vowels.indexOf(chars[start])!=-1)
+            {
+                end--;
+            }
+            else{
+                start++;
+            }
+        }
+
+        for(int i=0;i<chars.length;i++)
+        {
+            ans+=chars[i];
+        }
+
+        return ans;
+    }
+}
