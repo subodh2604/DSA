@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        Character[] hm=new Character[256];
+
+        boolean[] charMapped=new boolean[256];
+
+        for(int i=0;i<t.length();i++)
+        {
+            if(hm[t.charAt(i)]!=null)
+            {
+                if(s.charAt(i)!=hm[t.charAt(i)])
+                {
+                    return false;
+                }
+            }
+            else{
+                if(charMapped[s.charAt(i)])
+                {
+                    return false;
+                }
+                hm[t.charAt(i)]=s.charAt(i);
+                charMapped[s.charAt(i)]=true;
+            }
+        }
+
+        return true;
+    }
+}
