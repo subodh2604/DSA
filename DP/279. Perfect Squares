@@ -1,0 +1,40 @@
+class Solution {
+    public int findNumSquares(int n,int count,int[][] dp)
+    {
+        if(n==0)
+        {
+            return count;
+        }
+
+        if(dp[n][count]!=0)
+        {
+            return dp[n][count];
+        }
+
+        int ans=Integer.MAX_VALUE;
+
+        for(int i=1;i*i<=n;i++)
+        {
+            int currentCount=findNumSquares(n-i*i,count+1,dp);
+            ans=Math.min(ans,currentCount);
+        }
+        
+        dp[n][count]=ans;
+
+        return dp[n][count];
+    }
+
+    public int numSquares(int n) {
+
+        int[][] dp=new int[n+1][n+1];
+
+        // for(int i=0;i<=n;i++)
+        // {
+        //     Arrays.fill(dp[i],-1);
+        // }
+
+        int ans=findNumSquares(n,0,dp);
+
+        return ans;
+    }
+}
