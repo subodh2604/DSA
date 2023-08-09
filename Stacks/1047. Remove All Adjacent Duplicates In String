@@ -1,0 +1,29 @@
+class Solution {
+    public String removeDuplicates(String s) {
+        String ans="";
+
+        Stack<Character> stk=new Stack<>();
+
+        for(int i=0;i<s.length();i++)
+        {
+            if(stk.size()>0 && s.charAt(i)==stk.peek())
+            {
+                stk.pop();
+            }
+            else
+            {
+               stk.push(s.charAt(i));
+            }
+        }
+
+        while(!stk.isEmpty())
+        {
+            ans+=stk.pop();
+        }
+
+        StringBuilder stb=new StringBuilder(ans);
+        stb.reverse();
+        
+        return stb.toString();
+    }
+}
