@@ -1,0 +1,57 @@
+class Solution {
+    public String build(Stack<String> stk,String ans)
+    {
+        if(stk.isEmpty())
+        {
+            return ans;
+        }
+        String temp=stk.pop();
+        ans+=build(stk,ans);
+
+        ans+=temp;
+
+        return ans;
+    }
+
+    public String simplifyPath(String s) {
+        Stack<String> stk=new Stack<>();
+
+        int i=0;
+        
+        while(i<s.length())
+        {
+            int start=i;
+            int end=i+1;
+
+            while(end< s.length() && s.charAt(end)!='/')
+            {
+                end++;
+            }
+
+            String minPath=s.substring(start,end);
+            i=end;
+            if(minPath.equals("/") || minPath.equals("/."))
+            {
+                continue;
+            }
+            if(!minPath.equals("/.."))
+            {
+                stk.push(minPath);
+            }
+            else if(!stk.isEmpty()){
+                stk.pop();
+            }
+        }
+
+        if(stk.isEmpty())
+        {
+            return "/";
+        }
+
+        String ans="";
+
+        ans=build(stk,ans);
+
+        return ans;
+    }
+}
